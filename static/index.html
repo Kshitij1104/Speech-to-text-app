@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speech to Text</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <h1>Speech&nbsp;to&nbsp;Text</h1>
+    <span class="tag">Hindi · English · Hinglish</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" aria-labelledby="rec-h">
+    <h2 id="rec-h">Live transcription</h2>
+    <div class="controls">
+      <label>Language
+        <select id="mode">
+          <option value="hinglish" selected>Hindi + English (mixed)</option>
+          <option value="auto">Auto-detect</option>
+          <option value="en">English only</option>
+          <option value="hi">Hindi only</option>
+        </select>
+      </label>
+      <label class="grow">Title <span class="muted">(optional)</span>
+        <input id="title" type="text" maxlength="200" placeholder="e.g. Team standup">
+      </label>
+      <button id="rec" class="primary" type="button">
+        <span class="dot"></span><span id="rec-label">Start speaking</span>
+      </button>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite">Ready. Press the button and start speaking.</div>
+    <div id="live" class="live" aria-live="polite">
+      <span id="live-final"></span><span id="live-partial" class="partial"></span>
+      <span id="live-empty" class="muted">Your words will appear here as you speak…</span>
+    </div>
+    <details class="upload">
+      <summary>Or transcribe an audio file</summary>
+      <div class="controls">
+        <input id="file" type="file" accept="audio/*,video/*">
+        <button id="upload-btn" type="button">Transcribe file</button>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="hist-h">
+    <div class="row-between">
+      <h2 id="hist-h">History <span id="count" class="muted"></span></h2>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search…" aria-label="Search transcriptions">
+        <button id="new-btn" type="button">+ New entry</button>
+      </div>
+    </div>
+    <div id="list" class="list"></div>
+    <div class="pager">
+      <button id="prev" type="button">← Newer</button>
+      <span id="page-info" class="muted"></span>
+      <button id="next" type="button">Older →</button>
+    </div>
+  </section>
+</main>
+
+<dialog id="editor">
+  <form method="dialog" id="editor-form">
+    <h3 id="editor-h">Edit transcription</h3>
+    <label>Title <input id="e-title" maxlength="200" required></label>
+    <label>Language <input id="e-lang" maxlength="32" placeholder="hi, en, …"></label>
+    <label>Text <textarea id="e-text" rows="8" required></textarea></label>
+    <div class="actions">
+      <button value="cancel" type="button" id="e-cancel">Cancel</button>
+      <button class="primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="alert"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
